@@ -1,20 +1,24 @@
 fun main() {
-    val ints = arrayOfNulls<Int>(5) //インデックス数が引数
+    val ints: List<Int> = listOf<Int>(1, 2, 3) //インターフェースで宣言することでおそらくオーバーヘッド（処理の時間）が減る
+    println(ints)
     println(ints.size)
-
     println(ints[0])
-
-    ints[0] = 123
-    println(ints[0])
+//    ints[0] = 5  Error
 
     //
-    val strs = arrayOf("red", "green", "blue") //要素が引数
-    println(strs[0])
+    val chars: MutableList<Char> = mutableListOf('a', 'b')
+    println(chars)
+    println(chars[0])
+    chars[0] = 'z'
+    println(chars)
 
     //
-    val ints2: IntArray = intArrayOf(1, 2, 3)
-    println(ints2[0])
+    chars += 'X'
+    println(chars)
 
-    val chars: CharArray = charArrayOf('a', 'b')
-    println("${chars[0]}, ${chars[1]}")
+    chars -= 'X'
+    println(chars)
+
+    chars.removeAt(0)
+    println(chars)
 }
