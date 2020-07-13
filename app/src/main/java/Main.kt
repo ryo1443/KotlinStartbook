@@ -1,10 +1,12 @@
 fun main() {
-    val ints: Set<Int> = setOf(1, 2, 3, 4)
-    println(ints)
+    val numberMap: MutableMap<String, Int> =
+        mutableMapOf("one" to 1, "two" to 2) //Pairオブジェクトが必要。前者がキー後者がそれに対応する値
+    println(numberMap)
 
-    val chars: MutableSet<Char> = mutableSetOf('a', 'a', 'b') //setは重複の無いコレクション
-    println(chars)
+    println(numberMap.size)
+    println(numberMap["one"])
+    println(numberMap["three"])
 
-    chars += 'a'
-    println(chars)
+    numberMap += "three" to 3
+    println(numberMap)
 }
