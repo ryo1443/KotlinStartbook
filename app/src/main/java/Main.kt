@@ -1,24 +1,10 @@
 fun main() {
-    val ints: List<Int> = listOf<Int>(1, 2, 3) //インターフェースで宣言することでおそらくオーバーヘッド（処理の時間）が減る
+    val ints: Set<Int> = setOf(1, 2, 3, 4)
     println(ints)
-    println(ints.size)
-    println(ints[0])
-//    ints[0] = 5  Error
 
-    //
-    val chars: MutableList<Char> = mutableListOf('a', 'b')
-    println(chars)
-    println(chars[0])
-    chars[0] = 'z'
+    val chars: MutableSet<Char> = mutableSetOf('a', 'a', 'b') //setは重複の無いコレクション
     println(chars)
 
-    //
-    chars += 'X'
-    println(chars)
-
-    chars -= 'X'
-    println(chars)
-
-    chars.removeAt(0)
+    chars += 'a'
     println(chars)
 }
