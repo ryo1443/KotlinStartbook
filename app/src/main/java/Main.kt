@@ -1,42 +1,41 @@
 fun main() {
-    if (true) {
-        println("Hello")
+
+    var x = 1
+
+    when (x) {
+        1 -> println("one")
+        2, 3 -> println("two or three")
+        else -> { //if同様に最後に評価される式が全体の結果
+            println("unknown")
+        }
     }
-    if (5 in 1..10) {
-        println("wawa")
-        println("hoho")
-    }
-    if (1 + 2 < 3)
-        println("hoge")
 
     //
-    val score = 50
-    if (score >= 60){
-        println("合格！")
-    } else {
-        println("不合格！")
+    x = 5
+
+    when (x) { //関数やレンジを条件分岐に使える
+        1 -> println("one")
+//        myFavoriteInt() -> "favorite: $x"
+        in 2..10 -> println("1 <= x <= 10")
+        else -> println(x.toString())
     }
 
-    val message = if (score >= 60) "合格！" else "不合格！"
-    println(message)
-
     //
-    val x = if (true) { //ifやelseがブロックを取る場合、ブロック内で最後に評価される式が返される。今回は2
-        1
-        2
-    } else {
-        3
+    val y = "AAA"
+
+    val blank = when (y) { //型チェックにも使える
+        is String -> y.isBlank() //falseが返されることになる。
+        else -> true
     }
-    println(x)
+    println(blank)
 
     //
-    val score2 = 75
-    val grade =
-        if (score2 >= 90) 'A'
-        else if (score2 >= 80) 'B'
-        else if (score2 >= 70) 'C'
-        else if (score2 >= 60) 'D'
-        else 'F'
-
-    println(grade)
+    val score = 86
+    when { //if-elseチェーンを置き換えることが出来る。
+        score >= 90 -> 'A'
+        score >= 80 -> 'B'
+        score >= 70 -> 'C'
+        score >= 60 -> 'D'
+        else        -> 'F'
+    }
 }
