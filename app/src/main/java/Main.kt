@@ -1,12 +1,18 @@
 fun main() {
-    val numberMap: MutableMap<String, Int> =
-        mutableMapOf("one" to 1, "two" to 2) //Pairオブジェクトが必要。前者がキー後者がそれに対応する値
-    println(numberMap)
+    println(5 in 1..10)
 
-    println(numberMap.size)
-    println(numberMap["one"])
-    println(numberMap["three"])
+    val range: IntRange = 12..15
+    println(5 in range)
 
-    numberMap += "three" to 3
-    println(numberMap)
+    println(5 !in range)
+
+    //
+    println((1..5).toList())
+
+    println((1..5).reversed().toList()) //同じ
+    println((5 downTo 1).toList()) //同じ
+
+    println((1..5 step 2).toList())
+    println((100 downTo 0 step 25).toList())
+
 }
