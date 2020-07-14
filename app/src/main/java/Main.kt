@@ -1,15 +1,11 @@
 fun main() {
-    println(sum(listOf(3, 5, 10)))
-//    println(sum((1L..123456).toList())) //スタックがオーバーフローする
-    println(sum2(listOf(3, 5, 10))) //accumulatorはデフォルト値が設定されているので省略可
-    println(sum2((1L..123456).toList())) //TCOが有効になったことで計算可能になった。
-
+    println(sum(listOf(1, 3, 5)))
 }
 
-fun sum(numbers: List<Long>): Long =
-    if (numbers.isEmpty()) 0L //LongとIntの区別がつかないときは明示的にLでLongであることを示す。
-    else numbers.first() + sum(numbers.drop(1))
+fun sum(numbers: List<Long>): Long { //関数内に定義されている別の関数：ローカル関数。スコープの制限をしたいときに使う。
+    tailrec fun go(numbers: List<Long>, accumulator: Long): Long =
+        if (numbers.isEmpty()) accumulator //最終的にこれが返される。
+        else go(numbers.drop(1), accumulator + numbers.first())
 
-tailrec fun sum2(numbers: List<Long>, accumulator: Long = 0): Long = //tailrec = TCO 再起呼び出しが繰り返されるときのみ使える。
-    if (numbers.isEmpty()) accumulator
-    else sum2(numbers.drop(1), accumulator + numbers.first()) //再起呼び出しが基本的には繰り返される。→TCOが使える
+    return go(numbers, 0) //sumの返り値。accumulatorはsum以外操作不可
+}
