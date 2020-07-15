@@ -1,11 +1,14 @@
-fun square(i: Int): Int = i * i
+fun firstK(str: String): Int {
+    tailrec fun go(str: String, index: Int): Int =
+        when {
+            str.isEmpty() -> -1
+            str.first() == 'K' -> index
+            else -> go(str.drop(1), index + 1)
+        }
+    return go(str, 0)
+}
 
-fun main() { //関数オブジェクト
-    val functionObject = ::square //関数名の前に::で、関数オブジェクトが得れる。関数を変数や文字列などとして扱える。
-    println(functionObject(5)) //普通の関数のように扱える。
-
-    val functionObject2: (Int) -> Int = ::square //関数オブジェクトはこのように型を定義する
-    println(functionObject2(10))
-
+fun main() { //高階関数・・・関数を引数として受け取ったり、返り値として返す関数。関数の抽象化が可能
+    println(firstK("dcbehciboecbqcbqehcodKdndeqbeqyqu"))
 }
 
