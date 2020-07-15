@@ -1,18 +1,11 @@
-class Counter {
-    private var cut = 0
+fun square(i: Int): Int = i * i
 
-    fun countUp(): Unit { //結果を返さない関数はUnitという型の返り値を実は返している。
-        cut++
-        return Unit //Unitは全て省略可
-    }
+fun main() { //関数オブジェクト
+    val functionObject = ::square //関数名の前に::で、関数オブジェクトが得れる。関数を変数や文字列などとして扱える。
+    println(functionObject(5)) //普通の関数のように扱える。
 
-    fun getCount(): Int = cut
-}
-fun main() {
-    var x = Counter()
-    x.countUp()
-    x.countUp()
+    val functionObject2: (Int) -> Int = ::square //関数オブジェクトはこのように型を定義する
+    println(functionObject2(10))
 
-    println(x.getCount())
 }
 
