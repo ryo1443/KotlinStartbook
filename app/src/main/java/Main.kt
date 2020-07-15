@@ -18,11 +18,12 @@ fun firstUpperCase(str: String): Int {
     return go(str, 0)
 }
 
-fun first(str: String): Int {
+//firstで上記二つのメソッドの共通部分を抽出している。
+fun first(str: String, predicate: (Char) -> Boolean): Int { //predicateはCharを引数にとって、Booleanを返す関数オブジェクト
     tailrec fun go(str: String, index: Int): Int =
         when {
             str.isEmpty() -> -1
-            「str.first()に対する何らかの条件」 -> index
+            predicate(str.first()) -> index
             else -> go(str.drop(1), index + 1)
         }
     return go(str, 0)
