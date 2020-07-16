@@ -1,6 +1,6 @@
 import android.util.Log
 
-fun log(debug: Boolean = true, message: () -> String) { //二つ目の引数が関数オブジェクトであることで、実行タイミングを遅らせることが出来る。
+inline fun log(debug: Boolean = true, message: () -> String) { //二つ目の引数が関数オブジェクトであることで、実行タイミングを遅らせることが出来る。
     if (debug) {
         println(message())
     }
