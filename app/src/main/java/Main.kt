@@ -1,18 +1,21 @@
+fun firstWhitespace(str: String): Int {
+    val isWhitespace: (Char) -> Boolean = {
+        it.isWhitespace()
+    }
+    return first(str, isWhitespace)
+}
 
+fun first(str: String, predicate: (Char) -> Boolean): Int {
+    tailrec fun go(str: String, index: Int): Int =
+        when {
+            str.isEmpty() -> -1
+            predicate(str.first()) -> index
+            else -> go(str.drop(1), index + 1)
+        }
+    return go(str, 0)
+}
 fun main() { //ラムダ式・・・関数オブジェクトを直接生成するコード
-    val square: (Int) -> Int = { i: Int ->
-        i * i //returnは不要。最後に評価される式が返ってくる。
-    }
-    println(square(5))
-
-    val square2 = { i: Int -> //型推論が働く
-        i * i
-    }
-    println(square2(10))
-
-    val square3: (Int) -> Int = { //引数が一つだけのラムダ式は暗黙の変数itが使える。
-        it * it
-    }
+    println(firstWhitespace("duiqcnoin qxiuqnio"))
 
 }
 
