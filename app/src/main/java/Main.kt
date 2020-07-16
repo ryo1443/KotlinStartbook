@@ -1,5 +1,5 @@
 fun firstWhitespace(str: String): Int =
-    first(str, { it.isWhitespace() } ) //ラムダ式をそのまま引数に。
+    first(str) { it.isWhitespace() } //ラムダ式のための特別な構文。ラムダ式を引数の外に出すことが出来る。
 
 
 fun first(str: String, predicate: (Char) -> Boolean): Int {
