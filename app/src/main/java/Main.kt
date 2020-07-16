@@ -1,13 +1,18 @@
-import android.util.Log
-
-inline fun log(debug: Boolean = true, message: () -> String) { //二つ目の引数が関数オブジェクトであることで、実行タイミングを遅らせることが出来る。
-    if (debug) {
-        println(message())
+inline fun forEach(str: String, f: (Char) -> Unit) {
+    for (c in str) {
+        f(c)
     }
 }
 
-fun main() { //インライン関数・・・引数の関数オブジェクトが、コンパイル時にインライン展開される関数のこと
-    log { "このメッセージは出力される。"    } //インライン関数によってプログラムのサイズが大きくなる代わりに、オーバーヘッドを減らすことが出来る。
-    log(false) { "このメッセージは出力されない"} //関数は引数を渡したり返り値を返したりするたびにオーバーヘッドが生じてしまう。
+fun containsDigit(str: String): Boolean {
+    forEach(str) { //引数となる関数オブジェクト
+        if (it.isDigit())
+            return true
+    }
+    return false
+}
+
+fun main() { //非ローカルリターン・・・ラムダ式内でreturnを使った、外側の関数からのリターン。これを行う関数はインライン関数である必要がある。
+    println(containsDigit("aaa"))
 }
 
