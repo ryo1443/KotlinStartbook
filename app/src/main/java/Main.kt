@@ -1,18 +1,27 @@
-fun firstWhitespace(str: String): Int =
-    first(str) { it.isWhitespace() } //ラムダ式のための特別な構文。ラムダ式を引数の外に出すことが出来る。
-
-
-fun first(str: String, predicate: (Char) -> Boolean): Int {
-    tailrec fun go(str: String, index: Int): Int =
-        when {
-            str.isEmpty() -> -1
-            predicate(str.first()) -> index
-            else -> go(str.drop(1), index + 1)
-        }
-    return go(str, 0)
+fun foo(): Int {
+    val a = 1
+    val b = 2
+    return a + b
 }
 
-fun main() { //ラムダ式・・・関数オブジェクトを直接生成するコード
-    println(firstWhitespace("duiqcnoin qxiuqnio"))
+//fun bar(): Int {
+//    val c = 3
+////    return a + c //aにアクセス不可でコンパイルエラー
+//}
+
+fun getCounter(): ()->Int { //関数オブジェクトを返す関数。
+    var count = 0
+    return {
+        count++
+    }
+}
+fun main() { //クロージャ・・・コードを記述した時のスコープで変数が扱える関数オブジェクト
+    val counter1 = getCounter()
+    val counter2 = getCounter()
+    println(counter1()) //通常の関数ではあり得ない、スコープにアクセスした値の保持が出来ている。これがクロージャの最大のメリット。
+    println(counter1()) //関数内の値の保持
+    println(counter2())
+    println(counter1())
+    println(counter2())
 }
 
