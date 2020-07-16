@@ -1,9 +1,6 @@
-fun firstWhitespace(str: String): Int {
-    val isWhitespace: (Char) -> Boolean = {
-        it.isWhitespace()
-    }
-    return first(str, isWhitespace)
-}
+fun firstWhitespace(str: String): Int =
+    first(str, { it.isWhitespace() } ) //ラムダ式をそのまま引数に。
+
 
 fun first(str: String, predicate: (Char) -> Boolean): Int {
     tailrec fun go(str: String, index: Int): Int =
@@ -14,8 +11,8 @@ fun first(str: String, predicate: (Char) -> Boolean): Int {
         }
     return go(str, 0)
 }
+
 fun main() { //ラムダ式・・・関数オブジェクトを直接生成するコード
     println(firstWhitespace("duiqcnoin qxiuqnio"))
-
 }
 
