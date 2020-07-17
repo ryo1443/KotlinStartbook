@@ -1,5 +1,12 @@
-interface Bucket //オブジェクト式だとバケツはデータ型が無いので、名前による参照が出来ず、使い物にならない。interfaceで型を定義。
+interface Bucket {//オブジェクト式だとバケツはデータ型が無いので、名前による参照が出来ず、使い物にならない。interfaceで型を定義。
+    fun fill() //インターフェースによって、Bucketが持つべきメソッドを定義。
+    fun drainAway()
+    fun pourTo()
 
+    fun getCapacity(): Int
+    fun getQuantity(): Int
+    fun setQuantity(quantity: Int): Int
+}
 fun main() { //オブジェクトを生成するにはobjectを使う。オブジェクト内の関数的なのはメソッドという。
     val bucket = object : Bucket { //インターフェースを実装
         //バケツの容量
