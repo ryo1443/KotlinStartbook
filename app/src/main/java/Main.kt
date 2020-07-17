@@ -1,20 +1,34 @@
 
-fun main() { //無名関数（匿名関数）・・・ラムダ式のように、関数オブジェクトを直接得る記法の二つ目
-    //関数リテラル・・・ラムダ式と無名関数の総称
+fun main() { //オブジェクトを生成するにはobjectを使う。オブジェクト内の関数的なのはメソッドという。
+    val bucket = object {
+        //バケツの容量
+        val capacity: Int = 5
 
-    //ラムダ式
-    val square1: (Int) -> Int = { i: Int ->
-        i * i
-    }
-    println(square1(5))
-    //無名関数
-    val square2: (Int) -> Int = fun(i: Int): Int { //ラムダ式と違って、returnを使って値を返す。また、非ローカルリターンが不可。
-        return i * i
-    }
-    println(square2(11))
-    //無名関数省略バージョン
-    val square3: (Int) -> Int = fun(i: Int) = i * i
-    println(square3(13))
+        //入っている水の量
+        var quantity: Int = 0
 
+        //バケツを水で満たす
+        fun fill() {
+            quantity = capacity
+        }
+
+        //排水する
+        fun drainAway() {
+            quantity = 0
+        }
+
+        //入っている水の量を出力する
+        fun printQuantity() {
+            println(quantity)
+        }
+    }
+
+    //オブジェクトごとに複数のデータと手続きを行える。
+    //objectによるオブジェクト生成をオブジェクト式と呼ぶ
+    bucket.printQuantity()
+    bucket.fill()
+    bucket.printQuantity()
+    bucket.drainAway()
+    bucket.printQuantity()
 }
 
