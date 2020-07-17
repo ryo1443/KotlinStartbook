@@ -1,18 +1,20 @@
-inline fun forEach(str: String, f: (Char) -> Unit) { //インライン関数でないと、containsDigitでのreturnが許されない
-    for (c in str) {
-        f(c) //ここが返り値のはずだが、実際はcontsinsDigit内にその実体があるから、非ローカルリターン
-    }
-}
-
 fun containsDigit(str: String): Boolean {
-    forEach(str) { //引数となる関数オブジェクト
-        if (it.isDigit())
-            return true
+    var result = false
+    forEach(str) here@ {
+        if (it.isDigit()) {
+            result = true
+            return@here //hereと名付けられた場所（forEach）から脱出できる
+        }
     }
-    return false
+    return result
 }
 
-fun main() { //非ローカルリターン・・・ラムダ式内でreturnを使った、外側の関数からのリターン。これを行う関数はインライン関数である必要がある。
+inline fun forEach(str: String, f: (Char) -> Unit) {
+    for (c in str) {
+        f(c)
+    }
+}
+fun main() { //ラベルへのリターン・・・関数リテラル内で、外側の関数ではなく自身から脱出したいときに使う。
     println(containsDigit("aaa"))
 }
 
