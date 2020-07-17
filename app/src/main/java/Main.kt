@@ -1,20 +1,20 @@
-fun containsDigit(str: String): Boolean {
-    var result = false
-    forEach(str) {
-        if (it.isDigit()) {
-            result = true
-            return@forEach //基本的には関数名をラベルとして、ラベルへのリターンをすると良い。
-        }
-    }
-    return result
-}
 
-inline fun forEach(str: String, f: (Char) -> Unit) {
-    for (c in str) {
-        f(c)
+fun main() { //無名関数（匿名関数）・・・ラムダ式のように、関数オブジェクトを直接得る記法の二つ目
+    //関数リテラル・・・ラムダ式と無名関数の総称
+
+    //ラムダ式
+    val square1: (Int) -> Int = { i: Int ->
+        i * i
     }
-}
-fun main() { //ラベルへのリターン・・・関数リテラル内で、外側の関数ではなく自身から脱出したいときに使う。
-    println(containsDigit("aaa"))
+    println(square1(5))
+    //無名関数
+    val square2: (Int) -> Int = fun(i: Int): Int { //ラムダ式と違って、returnを使って値を返す。また、非ローカルリターンが不可。
+        return i * i
+    }
+    println(square2(11))
+    //無名関数省略バージョン
+    val square3: (Int) -> Int = fun(i: Int) = i * i
+    println(square3(13))
+
 }
 
