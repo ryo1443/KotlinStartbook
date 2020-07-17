@@ -1,6 +1,7 @@
+interface Bucket //オブジェクト式だとバケツはデータ型が無いので、名前による参照が出来ず、使い物にならない。interfaceで型を定義。
 
 fun main() { //オブジェクトを生成するにはobjectを使う。オブジェクト内の関数的なのはメソッドという。
-    val bucket = object {
+    val bucket = object : Bucket { //インターフェースを実装
         //バケツの容量
         val capacity: Int = 5
 
@@ -20,6 +21,11 @@ fun main() { //オブジェクトを生成するにはobjectを使う。オブ�
         //入っている水の量を出力する
         fun printQuantity() {
             println(quantity)
+        }
+
+        //他のバケツの注ぐ
+        fun pourTo(that: Bucket) {
+            //未実装
         }
     }
 
