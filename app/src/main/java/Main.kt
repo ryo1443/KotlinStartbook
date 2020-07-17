@@ -1,9 +1,9 @@
 fun containsDigit(str: String): Boolean {
     var result = false
-    forEach(str) here@ {
+    forEach(str) {
         if (it.isDigit()) {
             result = true
-            return@here //hereと名付けられた場所（forEach）から脱出できる
+            return@forEach //基本的には関数名をラベルとして、ラベルへのリターンをすると良い。
         }
     }
     return result
