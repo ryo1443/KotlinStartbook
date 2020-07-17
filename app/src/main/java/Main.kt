@@ -1,6 +1,6 @@
-inline fun forEach(str: String, f: (Char) -> Unit) {
+inline fun forEach(str: String, f: (Char) -> Unit) { //インライン関数でないと、containsDigitでのreturnが許されない
     for (c in str) {
-        f(c)
+        f(c) //ここが返り値のはずだが、実際はcontsinsDigit内にその実体があるから、非ローカルリターン
     }
 }
 
