@@ -34,7 +34,7 @@ fun createBucket(capacity: Int) : Bucket = object : Bucket {
 
     override fun getQuantity(): Int = _quantity
 
-    override fun setQuantity(quantity: Int): Int {
+    override fun setQuantity(quantity: Int) {
         _quantity = quantity
     }
 }
