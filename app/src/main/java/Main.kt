@@ -3,76 +3,49 @@ interface Bucket {//オブジェクト式だとバケツはデータ型が無い
     fun drainAway()
     fun pourTo(that: Bucket)
 
-    fun getCapacity(): Int
-    fun getQuantity(): Int
-    fun setQuantity(quantity: Int)
+    val capacity: Int //プロパティも実装しなければならない
+    var quantity: Int
 }
 
-fun createBucket(capacity: Int) : Bucket = object : Bucket {
-    var _quantity: Int = 0
+fun createBucket(_capacity: Int) : Bucket = object : Bucket {
+
+    override val capacity: Int = _capacity
+    override var quantity: Int = 0
 
     override fun fill() { //インターフェースのメソッドを実装するには必ずoverrideの修飾子を付ける
-        setQuantity(getCapacity())
+        quantity = capacity
     }
 
     override fun drainAway() {
-        setQuantity(0)
+        quantity = 0
     }
 
     override fun pourTo(that: Bucket) {
-        val thatVacuity = that.getCapacity() - that.getQuantity()
-        if (getQuantity() <= thatVacuity) {
-            that.setQuantity(that.getQuantity() + getQuantity())
-            drainAway()
+        val remainQuantity = that.capacity - that.quantity
+
+        if (quantity <= remainQuantity) {
+            that.quantity += quantity
+            quantity = 0
         } else {
+            quantity -= remainQuantity
             that.fill()
-            setQuantity(getQuantity() - thatVacuity)
         }
-    }
-
-    override fun getCapacity(): Int = capacity
-
-    override fun getQuantity(): Int = _quantity
-
-    override fun setQuantity(quantity: Int) {
-        _quantity = quantity
     }
 }
 fun main() { //オブジェクトを生成するにはobjectを使う。オブジェクト内の関数的なのはメソッドという。
-    val bucket = object : Bucket { //インターフェースを実装
-        //バケツの容量
-        val capacity: Int = 5
+    //容量7のバケツを作る
+    val bucket1 = createBucket(7)
 
-        //入っている水の量
-        var quantity: Int = 0
+    //容量4のバケツを作る
+    val bucket2 = createBucket(4)
 
-        //バケツを水で満たす
-        fun fill() {
-            quantity = capacity
-        }
+    //バケツ1を満たす
+    bucket1.fill()
 
-        //排水する
-        fun drainAway() {
-            quantity = 0
-        }
+    //バケツ1からバケツ2へ可能な限り注ぐ
+    bucket1.pourTo(bucket2)
 
-        //入っている水の量を出力する
-        fun printQuantity() {
-            println(quantity)
-        }
-
-        //他のバケツの注ぐ
-        fun pourTo(that: Bucket) {
-            //未実装
-        }
-    }
-
-    //オブジェクトごとに複数のデータと手続きを行える。
-    //objectによるオブジェクト生成をオブジェクト式と呼ぶ
-    bucket.printQuantity()
-    bucket.fill()
-    bucket.printQuantity()
-    bucket.drainAway()
-    bucket.printQuantity()
+    println(bucket1.quantity) //「3」を出力
+    println(bucket2.quantity) //「4」を出力
 }
 
