@@ -32,20 +32,42 @@ fun createBucket(_capacity: Int) : Bucket = object : Bucket {
         }
     }
 }
-fun main() { //オブジェクトを生成するにはobjectを使う。オブジェクト内の関数的なのはメソッドという。
-    //容量7のバケツを作る
-    val bucket1 = createBucket(7)
 
-    //容量4のバケツを作る
-    val bucket2 = createBucket(4)
+class BucketImpl(_capacity: Int) : Bucket {
+    override fun fill() {
+        quantity = capacity
+    }
 
-    //バケツ1を満たす
+    override fun drainAway() {
+        quantity = 0
+    }
+
+    override fun pourTo(that: Bucket) {
+        val thatVacuity = that.capacity - that.quantity
+
+        if (capacity <= thatVacuity) {
+            that.quantity += quantity
+            drainAway()
+        } else {
+            that.fill()
+            quantity -= thatVacuity
+        }
+    }
+
+    override val capacity: Int = _capacity
+
+    override var quantity: Int = 0
+}
+
+fun main() { //クラス・・・オブジェクトの設計図。オブジェクトを量産できる。逆に言うと、クラスはそれまででしかない。
+    val bucket1: Bucket = BucketImpl(7)
+    val bucket2: Bucket = BucketImpl(4)
+
     bucket1.fill()
-
-    //バケツ1からバケツ2へ可能な限り注ぐ
     bucket1.pourTo(bucket2)
 
     println(bucket1.quantity) //「3」を出力
     println(bucket2.quantity) //「4」を出力
+
 }
 
