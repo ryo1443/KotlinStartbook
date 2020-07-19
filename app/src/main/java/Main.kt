@@ -1,18 +1,11 @@
-class Person {
-    var name: String = "" //バッキングフィールド・・・プロパティに自動生成される。プロパティのみアクセス可能。
-    var age: Int = 0
-
-    val nameLength: Int //カスタムゲッター・・・バッキングフィールドを持たない。
-        get(): Int {
-            return this.name.length
-        }
+class Rational (val numerator: Int, val denominator: Int = 1) { //コンストラクタはデフォルト値の設定が可能
 }
 
-fun main() { //クラス・・・オブジェクトの設計図。オブジェクトを量産できる。逆に言うと、クラスはそれまででしかない。
-    val hanako = Person()
+fun main() {
+    val half = Rational(1, 2)
+    println("${half.numerator} / ${half.denominator}") //「1/2」
 
-    println(hanako.name) //「」を出力
-    hanako.name = "はなこ"
-    println(hanako.nameLength) //「3」を出力
+    val five = Rational(5)
+    println("${five.numerator} / ${five.denominator}") //「5/1」
 }
 
