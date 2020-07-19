@@ -1,24 +1,11 @@
-class Person {
-    var name: String = "" //バッキングフィールド・・・プロパティに自動生成される。プロパティのみアクセス可能。
-        set(value) { //カスタムセッター・・・引数はvalueが一般的。fieldというバッキングフィールドを表す暗黙の変数にvalueを格納している。
-            println("${value}がセットされました") //ゲッターやセッターにカスタムロジックを入れたい場合は、このようにして「バッキング・フィールド」を使う。
-            field = value
-        }
-
-    var age: Int = 0
-    val nameLength: Int //カスタムゲッター・・・バッキングフィールドを持たない。
-        get() = this.name.length //返り値の型とreturnの省略バージョン
-
+class Rational constructor(n: Int, d: Int) { //これはあくまでプロパティの初期化を手伝うための引数。×プロパティ
+    val numerator: Int = n
+    val denominator: Int = d
 }
 
-class MyClass { //lateinit・・・初期化を遅らせることが出来る。null許容型にしなくて良かったりする。
-    lateinit var foo: String
-}
-
-fun main() { //クラス・・・オブジェクトの設計図。オブジェクトを量産できる。逆に言うと、クラスはそれまででしかない。
-    val hanako = Person()
-
-    hanako.name = "はなこ" //「はなこがセットされました」を出力
-    println(hanako.name) //「はなこ」を出力
+fun main() {
+    val half = Rational(1, 2)
+    println(half.numerator) //「１」
+    println(half.denominator) //「２」
 }
 
