@@ -1,5 +1,4 @@
-class Rational (val numerator: Int, val denominator: Int) { //valやvarを付けると、そのままプロパティとして使える。
-    constructor(numerator: Int) : this(numerator, 1) //セカンダリコンストラクタ・・・プライマリコンストラクタとは別のコンストラクタ
+class Rational (val numerator: Int, val denominator: Int = 1) { //コンストラクタはデフォルト値の設定が可能
 }
 
 fun main() {
