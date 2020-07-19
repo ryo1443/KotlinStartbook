@@ -11,6 +11,10 @@ class Person {
 
 }
 
+class MyClass { //lateinit・・・初期化を遅らせることが出来る。null許容型にしなくて良かったりする。
+    lateinit var foo: String
+}
+
 fun main() { //クラス・・・オブジェクトの設計図。オブジェクトを量産できる。逆に言うと、クラスはそれまででしかない。
     val hanako = Person()
 
