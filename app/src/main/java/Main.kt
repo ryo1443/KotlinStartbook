@@ -1,11 +1,12 @@
-class Rational (val numerator: Int, val denominator: Int = 1) { //コンストラクタはデフォルト値の設定が可能
+class Rational (val numerator: Int, val denominator: Int = 1) { //イニシャライザ・・・インスタンス生成の際に実施しておきたい処理（初期化）をクラス内に定義することが出来る。
+    init {
+        //要求に反した場合、例外をスローする標準ライブラリ関数
+        require(denominator != 0)
+    }
 }
 
 fun main() {
-    val half = Rational(1, 2)
-    println("${half.numerator} / ${half.denominator}") //「1/2」
-
-    val five = Rational(5)
-    println("${five.numerator} / ${five.denominator}") //「5/1」
+    Rational(1, 1) //OK
+    Rational(1, 0) //エラー
 }
 
