@@ -1,17 +1,22 @@
+abstract class Greeter(val target: String) {
+    abstract fun sayHello()
+}
 
-fun countWords(s: String): Int =
-    s.split("""\s+""".toRegex()).size //文字列を空白文字で分けた配列の大きさを返す
+class EnglishGreeter(target: String) : Greeter(target) {
+    override fun sayHello() {
+        println("Hello, $target")
+    }
+}
 
-fun String.countWords2(): Int =
-    this.split("""\s+""".toRegex()).size //拡張関数バージョン。左辺がそのままmainで使われている。String→this
+class JapaneseGreeter(target: String) : Greeter(target) {
+    override fun sayHello() {
+        println("こんにちは、$target")
+    }
+}
 
-val String.wordsCount: Int
-    get() = split("""\s+""".toRegex()).size //拡張プロパティバージョン。カスタムゲッターの中で、単語数の処理を行っている。
+fun main() { //抽象クラス・・・インターフェース的な役割。インターフェースとの違いは実装できるか否か。
+    EnglishGreeter("Kotlin").sayHello()
 
-//拡張関数や拡張プロパティをまとめて、エクステンションと呼ぶ
-fun main() { //拡張関数・・・既存のクラスに対して、その定義には触れずにメソッドを追加する仕組み
-    println(countWords("I like Kotlin")) //「３」
-    println("I like Kotlin".countWords2())
-    println("I like Kotlin".wordsCount)
+    JapaneseGreeter("Java").sayHello()
 }
 
