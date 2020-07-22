@@ -1,16 +1,14 @@
 interface Foo {
-
-}
-
-interface Bar {
     fun execute()
 }
 
-class FooBar : Foo, Bar { //これは問題ない
-    override fun execute() {
-        println("FooBar")
+open class Superclass {
+    open fun execute() {
+        println("Superclass")
     }
 }
+
+class FooSubclass : Superclass(), Foo //文字通りスーパークラスで実装されているので、問題は生じない
 
 fun main() { //インターフェース・・・実装するオブジェクトにおけるプロトコル（取り決め）を表現する。
 
