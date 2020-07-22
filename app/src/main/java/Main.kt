@@ -6,7 +6,9 @@ open class Person(val name: String) { //継承元、スーパークラス。open
 
 class Student(name: String, val id: Long): Person(name) {//継承先、サブクラス。nameにはvalやvarは必要ない。（定義済みだから）
     override fun introduceMyself() {
-    println("I am $name(id = $id)")
+    println("--自己紹介ここから--")
+    super.introduceMyself() //スーパーメソッド
+    println("--自己紹介ここまで--")
     }
 }
 
