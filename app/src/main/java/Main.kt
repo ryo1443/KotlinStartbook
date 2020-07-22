@@ -1,22 +1,16 @@
-abstract class Greeter(val target: String) {
-    abstract fun sayHello()
+interface Greeter { //トップレベルに定義でき、同名の型を作る。（トップレベルとは、パッケージ直下の事
+    val language: String
+    fun sayHello(target: String)
 }
 
-class EnglishGreeter(target: String) : Greeter(target) {
-    override fun sayHello() {
+class EnglishGreeter : Greeter { //抽象クラスと異なり、インターフェースはコンストラクタが不要で複数実装できる。
+    override val language: String = "English"
+
+    override fun sayHello(target: String) {
         println("Hello, $target")
     }
 }
-
-class JapaneseGreeter(target: String) : Greeter(target) {
-    override fun sayHello() {
-        println("こんにちは、$target")
-    }
-}
-
-fun main() { //抽象クラス・・・インターフェース的な役割。インターフェースとの違いは実装できるか否か。
-    EnglishGreeter("Kotlin").sayHello()
-
-    JapaneseGreeter("Java").sayHello()
+fun main() { //インターフェース・・・実装するオブジェクトにおけるプロトコル（取り決め）を表現する。
+    println(EnglishGreeter().sayHello("Kotlin"))
 }
 
