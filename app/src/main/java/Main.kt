@@ -13,15 +13,21 @@ open class JapaneseGreeter() : Greeter {
     }
 }
 
-class JapaneseGreeterWithRecording() : JapaneseGreeter() {
+class JapaneseGreeterWithRecording() : Greeter {
+    private val greeter: Greeter = JapaneseGreeter()
+
     private val _targets: MutableSet<String> = mutableSetOf() //非公開プロパティ
 
     val targets: Set<String> //カプセル化を行っている
         get() = _targets
 
-    override fun sayHello(target: String) { //sayHelloの内容を記録するだけ
+    override fun sayHello() { //委譲・・・あるオブジェクトの仕事を、別のオブジェクトに任せる手法
+        greeter.sayHello()
+    }
+
+    override fun sayHello(target: String) {
         _targets += target
-        super.sayHello(target)
+        greeter.sayHello(target)
     }
 }
 fun main() { //インターフェース・・・実装するオブジェクトにおけるプロトコル（取り決め）を表現する。
