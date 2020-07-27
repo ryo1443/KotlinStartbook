@@ -1,16 +1,13 @@
-class Container(var value: Any) //オブジェクトの型はAny
+import android.support.v4.app.INotificationSideChannel
 
-class IntContainer(var value: Int)
-class StrContainer(var value: String) //このような型を定義しても良いが、他の型に対応できない
+class Container<T>(var value: T) //<T>という型パラメータをとるジェネリクスクラス
 
-fun main() { //ジェネリクス
-    val intContainer = Container(123)
-    val i: Int = intContainer.value as Int //強制的に型を変える処理をキャストという
+fun main() { //ジェネリクス・・・仮決めの型で柔軟にインスタンスを生成できる機構
+    val intContainer: Container<Int> = Container<Int>(123) //型引数として<Int>を渡す
+    val i: Int = intContainer.value
     println(i)
 
-    val strContainer = Container("Hello")
-    val s = strContainer.value as String //スーパータイプ→サブタイプへのキャストをダウンキャストという
-    println(s.toUpperCase())
-
+    val strContainer = Container<String>("Hello")
+    println(strContainer.value.toUpperCase())
 }
 
