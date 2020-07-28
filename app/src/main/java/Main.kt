@@ -1,17 +1,19 @@
 class Container<T>(val value: T)
 
-fun show(container: Container<Any>) { //デフォルトでは不変なので、StringやIntの型のオブジェクトは渡すことが出来ない。
+fun show(container: Container<out Any>) { //showを使うには、Anyを不変から共変にしてあげればよい。
+                                      //共変とは、StringがCharSequenceになるように、サブタイプになる事。outを付けてあげる
     println(container.toString())
     println(container.hashCode())
     println(container.value)
 }
 
-fun main() { //変位指定・・・不変、共変、反変の三種類が存在
+fun main() { //型投影・・・ジェネリック型の変位を指定することができる。操作を制限する事
     val a: Container<String> = Container("Hello") //Stringとcharの間にサブタイプの関係が成り立たない
-    val b: Container<CharSequence> = a //エラー。CharSequenceはStringのスーパータイプ
-
     val c: Container<Int> = Container(123)
-    show(a) //エラー
-    show(c) //エラー
+    show(a)  //上手くコンパイルされる
+    show(c)
+
+    val b: Container<out Any> = a
+    b.value = 123 //共変を使うからといって、このような危険な変更は出来ない。
 }
 
