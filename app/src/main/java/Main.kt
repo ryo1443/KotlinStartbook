@@ -1,10 +1,17 @@
-interface Hoge
-interface Fuga
-interface Piyo: Hoge, Fuga
+class Container<T>(val value: T)
 
-class Baz<T> where T : Hoge, T : Fuga //whereを用いることで、複数の上限境界（制約）を設定できる
+fun show(container: Container<Any>) { //デフォルトでは不変なので、StringやIntの型のオブジェクトは渡すことが出来ない。
+    println(container.toString())
+    println(container.hashCode())
+    println(container.value)
+}
 
-fun main() { //ジェネリック制約・・・型パラメータに対して、制約を設けることが出来る。
-    Baz<Piyo>() //OK
+fun main() { //変位指定・・・不変、共変、反変の三種類が存在
+    val a: Container<String> = Container("Hello") //Stringとcharの間にサブタイプの関係が成り立たない
+    val b: Container<CharSequence> = a //エラー。CharSequenceはStringのスーパータイプ
+
+    val c: Container<Int> = Container(123)
+    show(a) //エラー
+    show(c) //エラー
 }
 
