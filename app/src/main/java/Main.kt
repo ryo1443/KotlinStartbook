@@ -6,8 +6,8 @@ fun show(container: Container<Any>) { //宣言場所変位指定によって、�
     println(container.value)
 }
 
-fun main() { //宣言場所変位指定・・・クラスの宣言場所で変位を指定できる
-    val a: Container<String> = Container("Hello")
-    show(a)
+fun main() { //スター投影・・・型引数に*を置いて、型投影を行う事。オブジェクトの変更が不可能で、取得時はAny?型となる
+    val a: Container<*> = Container<Int>(5)
+    val b: Container<*> = Container<String>("ABC")
 }
 
