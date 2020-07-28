@@ -1,14 +1,13 @@
-class Container<T>(var value: T)
+interface Hoge
+interface Fuga
+class Foo<T>
+class Bar<T: Hoge>
 
-val <T> T.string: String
-    get() = toString()
+fun main() { //ジェネリ
+    Foo<Hoge>()
+    Foo<Fuga>()
 
-fun <T> box(value: T): Container<T> =
-    Container(value)
-
-
-fun main() { //関数やプロパティにもジェネリック関数やジェネリックプロパティとして適用できる。
-    val container: Container<Int> = box(5)
-    println(container.string)
+    Bar<Hoge>()
+    Bar<Fuga>()
 }
 
