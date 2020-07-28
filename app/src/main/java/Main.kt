@@ -1,46 +1,13 @@
-interface Greeter {
-    fun sayHello(target: String)
-    fun sayHello()
-}
+import android.support.v4.app.INotificationSideChannel
 
-open class JapaneseGreeter() : Greeter {
-    override fun sayHello(target: String) {
-        println("こんにちは、$target!")
-    }
+class Container<T>(var value: T) //<T>という型パラメータをとるジェネリクスクラス
 
-    override fun sayHello() {
-        println("こんにちは、匿名さん!")
-    }
-}
+fun main() { //ジェネリクス・・・仮決めの型で柔軟にインスタンスを生成できる機構
+    val intContainer: Container<Int> = Container<Int>(123) //型引数として<Int>を渡す
+    val i: Int = intContainer.value
+    println(i)
 
-class JapaneseGreeterWithRecording() : Greeter {
-    private val greeter: Greeter = JapaneseGreeter()
-
-    private val _targets: MutableSet<String> = mutableSetOf() //非公開プロパティ
-
-    val targets: Set<String> //カプセル化を行っている
-        get() = _targets
-
-    override fun sayHello() { //委譲・・・あるオブジェクトの仕事を、別のオブジェクトに任せる手法
-        greeter.sayHello()
-    }
-
-    override fun sayHello(target: String) {
-        _targets += target
-        greeter.sayHello(target)
-    }
-}
-fun main() { //インターフェース・・・実装するオブジェクトにおけるプロトコル（取り決め）を表現する。
-    val greeter = JapaneseGreeter()
-    greeter.sayHello()
-    greeter.sayHello("Kotlin")
-
-    val greeter2 = JapaneseGreeterWithRecording()
-    greeter2.sayHello("うらがみ")
-    greeter2.sayHello("がくぞ")
-    println(greeter2.targets)
-    greeter2.sayHello("***")
-    greeter2.sayHello()
-    println(greeter2.targets)
+    val strContainer = Container<String>("Hello")
+    println(strContainer.value.toUpperCase())
 }
 
