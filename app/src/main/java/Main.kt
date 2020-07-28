@@ -1,19 +1,14 @@
-class Container<T>(val value: T)
-
-fun show(container: Container<out Any>) { //showを使うには、Anyを不変から共変にしてあげればよい。
-                                      //共変とは、StringがCharSequenceになるように、サブタイプになる事。outを付けてあげる
-    println(container.toString())
-    println(container.hashCode())
-    println(container.value)
+class Container<T>(var value: T) {
+    fun copyTo(to: Container<in T>) { //反変にはinを使う。
+        to.value = value
+    }
 }
 
-fun main() { //型投影・・・ジェネリック型の変位を指定することができる。操作を制限する事
-    val a: Container<String> = Container("Hello") //Stringとcharの間にサブタイプの関係が成り立たない
-    val c: Container<Int> = Container(123)
-    show(a)  //上手くコンパイルされる
-    show(c)
-
-    val b: Container<out Any> = a
-    b.value = 123 //共変を使うからといって、このような危険な変更は出来ない。
+fun main() { //反変・・・StringがCharSequenceのスーパータイプになるような事
+    //inは入力専用outは出力専用無しだと入出力に対応と覚えればよい
+    val a: Container<Int> = Container(15)
+    val b: Container<Number> = Container(0)
+    a.copyTo(b) //bの値をaの値に変えている。このように、inは値の書き換えが可能
+    println(b.value) //15
 }
 
