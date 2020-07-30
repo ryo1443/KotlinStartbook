@@ -1,25 +1,9 @@
 
-fun main() { //スマートキャスト・・・対象の型へのキャストが安全であることを確認できるとき、自動的にキャストされる機能
-             //文脈的に確かである場合は、NullableをNotNullとして扱えるという事。スマートキャストの例は条件分岐
-    val a: String? = null
-    val b: String? = "Hello"
+fun main() { //安全呼び出し・・・nullの時はnullを返し、null出ない時は何かしら処理を行わせる為の糖衣構文
+    val a: Int? = null
+    val aInc: Int? = a?.inc() //aがnullの時はnullを返し、そうでないときはinc()が呼び出される。返り値はInt?
 
-    if (a != null) {
-        println(a.toUpperCase())
-    }
-    if (b != null) {
-        println(b.toUpperCase())
-    }
+    println(aInc)
 
-    val list: List<Any> = listOf(1, 'a', false) //スマートキャストはnull以外の型に対しても働く
-    for (e in list) {
-        val result: Any? = when (e) {
-            is Int -> e + 5
-            is Char -> e.toUpperCase()
-            is Boolean -> e.not()
-            else -> null
-        }
-        println(result)
-    }
 }
 
