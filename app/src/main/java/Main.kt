@@ -1,13 +1,25 @@
-class Container<out T>(val value: T) //Tに対して共変であるContainer
 
-fun show(container: Container<Any>) { //宣言場所変位指定によって、逐一型投影を書く手間が減る。
-    println(container.toString())
-    println(container.hashCode())
-    println(container.value)
-}
+fun main() { //スマートキャスト・・・対象の型へのキャストが安全であることを確認できるとき、自動的にキャストされる機能
+             //文脈的に確かである場合は、NullableをNotNullとして扱えるという事。スマートキャストの例は条件分岐
+    val a: String? = null
+    val b: String? = "Hello"
 
-fun main() { //スター投影・・・型引数に*を置いて、型投影を行う事。オブジェクトの変更が不可能で、取得時はAny?型となる
-    val a: Container<*> = Container<Int>(5)
-    val b: Container<*> = Container<String>("ABC")
+    if (a != null) {
+        println(a.toUpperCase())
+    }
+    if (b != null) {
+        println(b.toUpperCase())
+    }
+
+    val list: List<Any> = listOf(1, 'a', false) //スマートキャストはnull以外の型に対しても働く
+    for (e in list) {
+        val result: Any? = when (e) {
+            is Int -> e + 5
+            is Char -> e.toUpperCase()
+            is Boolean -> e.not()
+            else -> null
+        }
+        println(result)
+    }
 }
 
