@@ -1,19 +1,14 @@
-class User(val id: Long, val name: String) //toStringなどを実装しないと不便
+interface Greeter {
+    fun greet()
+}
 
-data class User2(val id: Long, val name: String) //Userのデータクラス版
+fun main() { //オブジェクト式・・・キーワードobjectの後にオブジェクトを生成して定義する。
+    val greeter = object: Greeter { //クラスを継承したリ、インターフェースを実装したリ出来る。
+        override fun greet() {
+            println("Hello")
+        }
+    }
 
-fun main() { //dataクラス・・・データを持つことに特化したクラス。
-    println(User(1, "Taro") == User(1, "Taro")) //同じであるはずなのにfalse
-    println(User(2, "Hanako"))
-
-    println(User2(1, "Taro") == User2(1, "Taro")) //期待通りtrue
-    println(User2(2, "Hanako")) //内容がちゃんと見れる
-
-    val taro = User2(1, "Taro")
-    println(taro)
-
-    val newTaro = taro.copy(id = 112233) //レシーバとなるオブジェクトのコピーを生成する。
-    println(newTaro)
-    println(taro)
+    greeter.greet()
 }
 
