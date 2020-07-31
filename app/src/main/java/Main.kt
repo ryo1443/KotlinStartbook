@@ -1,8 +1,13 @@
-fun main() { //安全キャスト・・・asを用いたダウンキャストをnull安全にしたもの。as?を使う
-    val str: Any = "本当は文字列"
-    println(str as String)
-//    println(str as Int) //エラー
+class User(val id: Long, val name: String) {
+    companion object Pool { //Poolという名前のcompanion object
+        val DUMMY = User(0, "dummy")
+    }
+}
 
-    println(str as? Int) //null
+fun main() { //コンパニオンオブジェクト・・・シングルトンオブジェクトをクラス内に定義する。一つのクラスに一つだけ
+    val dummy = User.Pool.DUMMY
+    println("${dummy.id}, ${dummy.name}")
+
+    println(User.DUMMY.name) //Poolを経由せずとも直接メンバにアクセスできる
 }
 
