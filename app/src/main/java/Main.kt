@@ -1,14 +1,20 @@
 interface Greeter {
-    fun greet()
+    fun greet(name: String)
 }
 
-fun main() { //オブジェクト式・・・キーワードobjectの後にオブジェクトを生成して定義する。
-    val greeter = object: Greeter { //クラスを継承したリ、インターフェースを実装したリ出来る。
-        override fun greet() {
-            println("Hello")
-        }
+object JapaneseGreeter: Greeter { //クラスを継承したリ、インターフェースを実装したリ出来る。
+    override fun greet(name: String) {
+        println("こんにちは、$name さん")
     }
+}
 
-    greeter.greet()
+fun main() { //オブジェクト宣言・・・シングルトン（唯一のインスタンスが存在するようなパターン）なクラスを定義する
+    JapaneseGreeter.greet("たろう")
+
+    val greeter: JapaneseGreeter = JapaneseGreeter
+    greeter.greet("次郎")
+
+    val greeter2: JapaneseGreeter = JapaneseGreeter
+    greeter2.greet("さぶろう")
 }
 
