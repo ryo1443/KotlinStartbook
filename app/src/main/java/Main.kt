@@ -1,8 +1,10 @@
-fun main() { //安全キャスト・・・asを用いたダウンキャストをnull安全にしたもの。as?を使う
-    val str: Any = "本当は文字列"
-    println(str as String)
-//    println(str as Int) //エラー
+class MyInt(val value: Int) {
+    operator fun times(that: MyInt): MyInt =
+        MyInt(value * that.value)
+}
 
-    println(str as? Int) //null
+fun main() { //演算子オーバーロード・・・あるメソッドを対応する演算子で呼び出せるようにする仕組み。
+    val product = MyInt(3) * MyInt(5)
+    println(product.value)
 }
 
